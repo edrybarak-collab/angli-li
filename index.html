@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אנגלי-לי | לימוד אנגלית לילדים</title>
+  <meta name="description" content="אנגלי-לי - הדרך הכי כיפית לילדים ללמוד אנגלית. אותיות, מילים ומשפטים לגילאי 4-8." />
+  <link rel="icon" type="image/png" href="images/app_icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-dark:   #1565C0;
+      --blue-mid:    #1E88E5;
+      --blue-light:  #4FC3F7;
+      --sky-pale:    #E1F5FE;
+      --purple:      #7C3AED;
+      --purple-light:#A855F7;
+      --yellow:      #FDD835;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Assistant', 'Varela Round', sans-serif;
+      background: linear-gradient(180deg, #0D47A1 0%, #1565C0 15%, #1E88E5 35%, #4FC3F7 60%, #B3E5FC 80%, #E1F5FE 100%);
+      min-height: 100vh;
+      color: #1a1a2e;
+      overflow-x: hidden;
+    }
+
+    /* ─── STARS ─── */
+    .stars-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: .2; transform: scale(1); }
+      50%       { opacity: 1;  transform: scale(1.4); }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(13, 71, 161, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img { width: 40px; height: 40px; border-radius: 10px; }
+    .nav-logo span {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .nav-btn {
+      background: var(--yellow);
+      color: #1a1a00;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      font-family: inherit;
+    }
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(253,216,53,.5); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: .9rem;
+      color: white;
+      margin-bottom: 20px;
+      animation: fadeDown .6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(0,0,0,.3);
+      animation: fadeDown .6s .1s ease both;
+    }
+    .hero h1 span { color: var(--yellow); }
+    .hero p {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,.9);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 36px;
+      animation: fadeDown .6s .2s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 64px;
+      animation: fadeDown .6s .3s ease both;
+    }
+    .btn-store {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: #111;
+      border-radius: 14px;
+      padding: 12px 22px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    .btn-store:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+    .btn-store svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .btn-store .store-text { text-align: right; }
+    .btn-store .store-sub { font-size: .72rem; font-weight: 400; opacity: .6; display: block; }
+    .btn-store .store-name { font-size: 1rem; font-weight: 800; }
+
+    /* hero main image */
+    .hero-image-wrap {
+      position: relative;
+      animation: floatUp 3s ease-in-out infinite;
+    }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+    .hero-image-wrap img {
+      width: min(340px, 80vw);
+      border-radius: 28px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.35);
+    }
+    .hero-sparkle {
+      position: absolute;
+      font-size: 2rem;
+      animation: spin 4s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .hero-sparkle.s1 { top: -20px; right: -20px; animation-duration: 5s; }
+    .hero-sparkle.s2 { bottom: 30px; left: -25px; animation-duration: 7s; animation-direction: reverse; }
+    .hero-sparkle.s3 { top: 40%; right: -35px; animation-duration: 6s; }
+
+    /* ─── SECTION BASE ─── */
+    section { position: relative; z-index: 1; padding: 80px 24px; }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #0D47A1;
+    }
+    .section-sub {
+      text-align: center;
+      font-size: 1.05rem;
+      color: #37474f;
+      margin-bottom: 52px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ─── FEATURES ─── */
+    .features { background: rgba(255,255,255,.65); backdrop-filter: blur(8px); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      transition: transform .3s, box-shadow .3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .feature-card.visible {
+      animation: fadeUp .5s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,.12); }
+    .feature-icon {
+      font-size: 3.2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0D47A1;
+      margin-bottom: 8px;
+    }
+    .feature-card p { font-size: .95rem; color: #546e7a; line-height: 1.6; }
+
+    /* ─── SCREENSHOTS ─── */
+    .screenshots { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.5) 100%); }
+    .screenshots-track-wrap {
+      overflow: hidden;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .screenshots-track {
+      display: flex;
+      gap: 24px;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+      align-items: center;
+    }
+    .screenshot-slide {
+      flex-shrink: 0;
+      width: 260px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 50px rgba(0,0,0,.2);
+      transition: transform .3s;
+    }
+    .screenshot-slide:hover { transform: scale(1.03); }
+    .screenshot-slide img { width: 100%; display: block; }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      align-items: center;
+    }
+    .carousel-btn {
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+      transition: transform .2s, box-shadow .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0D47A1;
+    }
+    .carousel-btn:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(0,0,0,.2); }
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(13,71,161,.25);
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+    .dot.active { background: #0D47A1; transform: scale(1.3); }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: rgba(255,255,255,.7); backdrop-filter: blur(8px); }
+    .steps-row {
+      display: flex;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .step {
+      flex: 1 1 180px;
+      text-align: center;
+      padding: 20px 16px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .step.visible { animation: fadeUp .5s ease forwards; }
+    .step:not(:last-child)::after {
+      content: '←';
+      position: absolute;
+      left: 0;
+      top: 38px;
+      font-size: 1.5rem;
+      color: #90CAF9;
+    }
+    @media (max-width: 600px) { .step:not(:last-child)::after { display: none; } }
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1E88E5, #7C3AED);
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 6px 20px rgba(124,58,237,.3);
+    }
+    .step h4 { font-size: 1.05rem; font-weight: 800; color: #0D47A1; margin-bottom: 6px; }
+    .step p  { font-size: .88rem; color: #546e7a; line-height: 1.5; }
+
+    /* ─── FREE BADGE ─── */
+    .free-section {
+      text-align: center;
+      padding: 64px 24px;
+    }
+    .free-card {
+      background: linear-gradient(135deg, #1E88E5, #7C3AED);
+      border-radius: 32px;
+      padding: 52px 32px;
+      max-width: 640px;
+      margin: 0 auto;
+      color: white;
+      box-shadow: 0 20px 60px rgba(124,58,237,.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .free-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .free-card h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .free-card p {
+      font-size: 1.05rem;
+      opacity: .9;
+      margin-bottom: 32px;
+      line-height: 1.6;
+      position: relative;
+    }
+    .free-card .hero-btns { margin-bottom: 0; }
+    .btn-store.dark {
+      background: rgba(0,0,0,.25);
+      color: white;
+      border: 1px solid rgba(255,255,255,.3);
+    }
+    .btn-store.dark .store-sub { opacity: .7; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: rgba(255,255,255,.7);
+      font-size: .9rem;
+      border-top: 1px solid rgba(255,255,255,.15);
+      position: relative;
+      z-index: 1;
+    }
+    footer a { color: rgba(255,255,255,.85); text-decoration: underline; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      nav { padding: 12px 20px; }
+      .hero { padding: 56px 20px 48px; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-store { width: 240px; justify-content: center; }
+      .screenshot-slide { width: 200px; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars-layer" id="starsLayer"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="images/app_icon.png" alt="אנגלי-לי" />
+      <span>אנגלי-לי</span>
+    </a>
+    <a href="#download" class="nav-btn">הורידו עכשיו</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">✨ חדש לגילאי 4–8</div>
+    <h1>לימוד <span>אנגלית</span><br/>שילדים מאהבים</h1>
+    <p>אותיות, מילים ומשפטים בדרך מהנה ומותאמת לגיל הרך. הצעד הראשון של הילד שלכם לאנגלית מתחיל כאן.</p>
+    <div class="hero-btns" id="download">
+      <a href="#" class="btn-store">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="store-text">
+          <span class="store-sub">הורידו ב</span>
+          <span class="store-name">App Store</span>
+        </div>
+      </a>
+      <a href="#" class="btn-store">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.28-7.04-2.58-2.59-10.69 9.44zm-1.81-20.1c-.22.34-.34.76-.34 1.23v17.82c0 .47.12.89.34 1.23l.07.06 9.98-9.98v-.24L1.44 3.6l-.07.06zm21.52 9.35l-2.86-1.64-2.88 2.88 2.88 2.88 2.89-1.66c.82-.47.82-1.23-.03-1.46zM4.17.48C3.82.43 3.48.5 3.18.67L13.87 11.4l2.58-2.59L4.17.48z"/></svg>
+        <div class="store-text">
+          <span class="store-sub">הורידו ב</span>
+          <span class="store-name">Google Play</span>
+        </div>
+      </a>
+    </div>
+    <div class="hero-image-wrap">
+      <span class="hero-sparkle s1">⭐</span>
+      <span class="hero-sparkle s2">🌟</span>
+      <span class="hero-sparkle s3">✨</span>
+      <img src="images/1.png" alt="אנגלי-לי" />
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2 class="section-title">מה לומדים באנגלי-לי?</h2>
+    <p class="section-sub">שלושה עולמות לימוד מלאים, מסודרים מהקל לקשה ומותאמים לגיל הרך</p>
+    <div class="features-grid">
+      <div class="feature-card" data-delay="0">
+        <span class="feature-icon">🔤</span>
+        <h3>אותיות האלפבית</h3>
+        <p>מכירים כל אות – צורה, שם וצליל. מוצאים מילים ומתרגלים לכתוב.</p>
+      </div>
+      <div class="feature-card" data-delay="100">
+        <span class="feature-icon">📝</span>
+        <h3>מילים לפי נושאים</h3>
+        <p>חיות, פירות, צבעים, משפחה ועוד. שומעים, מזהים וכותבים.</p>
+      </div>
+      <div class="feature-card" data-delay="200">
+        <span class="feature-icon">💬</span>
+        <h3>משפטים ראשונים</h3>
+        <p>משפטים פשוטים ומהנים – שומעים, חוזרים ומרכיבים לבד.</p>
+      </div>
+      <div class="feature-card" data-delay="300">
+        <span class="feature-icon">🎮</span>
+        <h3>משחקים וחזרות</h3>
+        <p>משחקוני חזרה כיפיים אחרי כל כמה שיעורים שמחזקים את הלמידה.</p>
+      </div>
+      <div class="feature-card" data-delay="400">
+        <span class="feature-icon">🗺️</span>
+        <h3>מפת התקדמות</h3>
+        <p>הילד רואה בדיוק איפה הוא נמצא ולאן הוא הולך – עם כוכבים ועידוד.</p>
+      </div>
+      <div class="feature-card" data-delay="500">
+        <span class="feature-icon">🔒</span>
+        <h3>בטוח לילדים</h3>
+        <p>ללא פרסומות, ללא גלישה, ללא איסוף מידע. בטוח לשימוש עצמאי.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="screenshots">
+    <h2 class="section-title">האפליקציה מבפנים</h2>
+    <p class="section-sub">ממשק צבעוני ואינטואיטיבי שגם ילדים קטנים יכולים לנווט לבד</p>
+    <div class="screenshots-track-wrap">
+      <div class="screenshots-track" id="screenshotsTrack">
+        <div class="screenshot-slide"><img src="images/1.png" alt="מסך פתיחה" /></div>
+        <div class="screenshot-slide"><img src="images/2.png" alt="שיעור מילים" /></div>
+        <div class="screenshot-slide"><img src="images/3.png" alt="שיעור מילים 2" /></div>
+        <div class="screenshot-slide"><img src="images/4.png" alt="משחקים" /></div>
+        <div class="screenshot-slide"><img src="images/5.png" alt="שיעור משפטים" /></div>
+        <div class="screenshot-slide"><img src="images/6.png" alt="שיעור כתיבה" /></div>
+        <div class="screenshot-slide"><img src="images/7.png" alt="מפת למידה" /></div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn">&#8249;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn" id="nextBtn">&#8250;</button>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <h2 class="section-title">איך זה עובד?</h2>
+    <p class="section-sub">ארבעה שלבים פשוטים שהילד עובר בכל שיעור</p>
+    <div class="steps-row">
+      <div class="step" data-delay="0">
+        <div class="step-num">1</div>
+        <h4>מאזינים</h4>
+        <p>שומעים את האות, המילה או המשפט עם הגייה נכונה</p>
+      </div>
+      <div class="step" data-delay="100">
+        <div class="step-num">2</div>
+        <h4>מזהים</h4>
+        <p>מוצאים ובוחרים מתוך אפשרויות בצורה מהנה</p>
+      </div>
+      <div class="step" data-delay="200">
+        <div class="step-num">3</div>
+        <h4>חוזרים</h4>
+        <p>מקליטים את עצמם ושומעים את ההגייה שלהם</p>
+      </div>
+      <div class="step" data-delay="300">
+        <div class="step-num">4</div>
+        <h4>מתרגלים</h4>
+        <p>בונים ומרכיבים – וחוגגים עם שלושה כוכבים</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="free-section">
+    <div class="free-card">
+      <h2>התחילו בחינם עוד היום</h2>
+      <p>שיעורים ראשונים לחלוטין בחינם. בלי צורך בהרשמה, בלי כרטיס אשראי.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-store dark">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="store-text">
+            <span class="store-sub">הורידו ב</span>
+            <span class="store-name">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="btn-store dark">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.28-7.04-2.58-2.59-10.69 9.44zm-1.81-20.1c-.22.34-.34.76-.34 1.23v17.82c0 .47.12.89.34 1.23l.07.06 9.98-9.98v-.24L1.44 3.6l-.07.06zm21.52 9.35l-2.86-1.64-2.88 2.88 2.88 2.88 2.89-1.66c.82-.47.82-1.23-.03-1.46zM4.17.48C3.82.43 3.48.5 3.18.67L13.87 11.4l2.58-2.59L4.17.48z"/></svg>
+          <div class="store-text">
+            <span class="store-sub">הורידו ב</span>
+            <span class="store-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 אנגלי-לי | <a href="https://edrybarak-collab.github.io/angli-li-privacy/" target="_blank">מדיניות פרטיות</a></p>
+  </footer>
+
+  <script>
+    // ─── STARS ───
+    const layer = document.getElementById('starsLayer');
+    for (let i = 0; i < 80; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 3 + 1;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random()*100}%;
+        left:${Math.random()*100}%;
+        --dur:${2+Math.random()*4}s;
+        --delay:-${Math.random()*4}s;
+      `;
+      layer.appendChild(s);
+    }
+
+    // ─── SCROLL REVEAL ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = e.target.dataset.delay || 0;
+          setTimeout(() => e.target.classList.add('visible'), +delay);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.feature-card, .step').forEach(el => observer.observe(el));
+
+    // ─── CAROUSEL ───
+    const track = document.getElementById('screenshotsTrack');
+    const slides = track.querySelectorAll('.screenshot-slide');
+    const dotsContainer = document.getElementById('carouselDots');
+    let current = 0;
+    const total = slides.length;
+    const slideWidth = () => slides[0].offsetWidth + 24;
+
+    // create dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(d);
+    });
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      const offset = current * slideWidth();
+      track.style.transform = `translateX(${offset}px)`;
+      dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current + 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current - 1));
+
+    // auto-play
+    setInterval(() => goTo(current - 1), 3500);
+  </script>
+</body>
+</html>
