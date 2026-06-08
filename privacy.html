@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מדיניות פרטיות | אנגלי-לי</title>
+  <meta name="description" content="מדיניות הפרטיות של אנגלי-לי – אפליקציה ללימוד אנגלית לילדים." />
+  <link rel="icon" type="image/png" href="images/app_icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #060618; --purple: #2d1b69; --blue: #1565c0;
+      --gold: #ffd700; --glass: rgba(255,255,255,.07);
+      --glass-border: rgba(255,255,255,.15);
+      --text-soft: rgba(255,255,255,.75);
+      --text-dim: rgba(255,255,255,.42);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Assistant', 'Varela Round', sans-serif;
+      background: linear-gradient(180deg,#060618 0%,#0a0a2e 8%,#1a0a3c 22%,#2d1b69 50%,#1565c0 100%);
+      background-attachment: fixed;
+      min-height: 100vh; color: white; overflow-x: hidden;
+    }
+
+    /* ─── BG ─── */
+    .stars-layer { position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .star {
+      position:absolute; border-radius:50%; background:white;
+      animation: twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);
+    }
+    @keyframes twinkle {
+      0%,100% { opacity:.08; transform:scale(1); }
+      50%      { opacity:.8;  transform:scale(1.5); }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position:sticky; top:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 40px;
+      background:rgba(6,6,24,.85); backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-logo img { width:40px; height:40px; border-radius:11px; box-shadow:0 4px 14px rgba(0,0,0,.4); }
+    .nav-logo-name { font-size:1.2rem; font-weight:800; color:white; display:block; letter-spacing:-.5px; }
+    .nav-logo-sub  { font-size:.65rem; color:var(--text-dim); display:block; margin-top:2px; }
+    .nav-back {
+      display:flex; align-items:center; gap:6px;
+      color:var(--text-soft); text-decoration:none; font-size:.9rem; font-weight:600;
+      transition:color .2s;
+    }
+    .nav-back:hover { color:white; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      position:relative; z-index:1; text-align:center;
+      padding:72px 24px 56px;
+    }
+    .page-header .badge {
+      display:inline-block;
+      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+      border-radius:50px; padding:6px 20px; font-size:.85rem;
+      color:var(--text-soft); margin-bottom:22px;
+    }
+    .page-header h1 {
+      font-size:clamp(2rem,5vw,3.2rem); font-weight:800;
+      color:white; margin-bottom:14px; line-height:1.15;
+    }
+    .page-header p { font-size:1rem; color:var(--text-soft); line-height:1.7; }
+    .updated-date { font-size:.82rem; color:var(--text-dim); margin-top:10px; }
+
+    /* ─── CONTENT ─── */
+    .content-wrap {
+      position:relative; z-index:1;
+      max-width:800px; margin:0 auto; padding:0 24px 80px;
+    }
+    .legal-card {
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(20px);
+      border-radius:28px;
+      padding:52px 56px;
+      color:#1a1a2e;
+    }
+    @media (max-width:680px) { .legal-card { padding:36px 28px; } }
+
+    .legal-card h2 {
+      font-size:1.35rem; font-weight:800; color:#0D47A1;
+      margin-bottom:12px; margin-top:36px; padding-bottom:8px;
+      border-bottom:2px solid #E3F2FD;
+    }
+    .legal-card h2:first-child { margin-top:0; }
+    .legal-card p { font-size:.97rem; line-height:1.78; color:#37474f; margin-bottom:14px; }
+    .legal-card ul { padding-right:24px; margin-bottom:14px; }
+    .legal-card ul li { font-size:.97rem; line-height:1.78; color:#37474f; margin-bottom:8px; }
+    .legal-card a { color:#1565C0; font-weight:600; }
+    .legal-card .highlight-box {
+      background:#E3F2FD; border-radius:14px; padding:18px 22px;
+      margin:18px 0; border-right:4px solid #1565C0;
+    }
+    .legal-card .highlight-box p { margin-bottom:0; color:#0D47A1; font-weight:600; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position:relative; z-index:1;
+      background:rgba(0,0,0,.38); border-top:1px solid rgba(255,255,255,.07);
+      padding:40px 32px; text-align:center;
+    }
+    .footer-inner {
+      max-width:860px; margin:0 auto;
+      display:flex; flex-direction:column; align-items:center; gap:20px;
+    }
+    .footer-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .footer-logo img { width:36px; height:36px; border-radius:10px; }
+    .footer-logo span { font-size:1.05rem; font-weight:800; color:rgba(255,255,255,.85); }
+    .footer-links { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
+    .footer-links a { color:var(--text-dim); text-decoration:none; font-size:.88rem; transition:color .2s; }
+    .footer-links a:hover { color:white; }
+    .footer-copy { font-size:.78rem; color:var(--text-dim); }
+
+    @media (max-width:600px) { nav { padding:12px 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="stars-layer" id="starsLayer"></div>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/app_icon.png" alt="אנגלי-לי" />
+      <div>
+        <span class="nav-logo-name">אנגלי-לי</span>
+        <span class="nav-logo-sub">לימוד אנגלית לילדים</span>
+      </div>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      חזרה לאתר
+    </a>
+  </nav>
+
+  <!-- ─── PAGE HEADER ─── -->
+  <div class="page-header">
+    <div class="badge">🔒 שקיפות מלאה</div>
+    <h1>מדיניות פרטיות</h1>
+    <p>מה אנחנו אוספים, למה, וכיצד אנחנו מגנים על המידע שלכם</p>
+    <p class="updated-date">עודכן לאחרונה: יוני 2026</p>
+  </div>
+
+  <!-- ─── CONTENT ─── -->
+  <div class="content-wrap">
+    <div class="legal-card">
+
+      <div class="highlight-box">
+        <p>📋 תקציר: אנגלי-לי אוספת מינימום מידע, לא מוכרת מידע לצדדים שלישיים, ולא מציגה פרסומות. האפליקציה בטוחה לילדים.</p>
+      </div>
+
+      <h2>1. מי אנחנו</h2>
+      <p>אנגלי-לי ("האפליקציה", "אנחנו") היא אפליקציה ללימוד אנגלית לילדים בגילאי 4–8, פותחה על-ידי בר אדרי, ישראל.</p>
+      <p>לפניות בנושאי פרטיות: <a href="mailto:support@angli-li.com">support@angli-li.com</a></p>
+
+      <h2>2. מידע שאנחנו אוספים</h2>
+      <p>האפליקציה פועלת בעיקרה ללא צורך ביצירת חשבון. המידע שנאסף מוגבל לאלו בלבד:</p>
+      <ul>
+        <li><strong>שם הילד (אופציונלי):</strong> מוזן בידי ההורה בהגדרת האפליקציה לראשונה. נשמר מקומית על המכשיר בלבד ולא מועבר לשרתים חיצוניים.</li>
+        <li><strong>התקדמות בלמידה:</strong> שלבים שהושלמו, ניקודים וכוכבים – נשמרים מקומית על המכשיר בלבד.</li>
+        <li><strong>נתוני רכישה (למנויים בלבד):</strong> עיבוד תשלומים מתבצע דרך Apple App Store ו-Google Play. אנחנו לא רואים פרטי כרטיס האשראי שלכם ולא שומרים אותם. אנחנו משתמשים בשירות RevenueCat לניהול מנויים – ראו <a href="https://www.revenuecat.com/privacy" target="_blank">מדיניות הפרטיות של RevenueCat</a>.</li>
+        <li><strong>נתוני שימוש אנונימיים:</strong> מידע טכני כגון גרסת מערכת ההפעלה ופרטי קריסות, שנאסף על-ידי Apple/Google לצורך שיפור יציבות האפליקציה.</li>
+      </ul>
+
+      <h2>3. מה אנחנו לא אוספים</h2>
+      <ul>
+        <li>לא אוספים כתובות דוא"ל, מספרי טלפון או כל פרט מזהה אחר.</li>
+        <li>לא אוספים מיקום גיאוגרפי.</li>
+        <li>לא אוספים תמונות, קולות או הקלטות – גם אם הילד משתמש בפונקצית ההקלטה, הקבצים נשמרים זמנית על המכשיר בלבד ונמחקים לאחר הסיום.</li>
+        <li>לא מציגים פרסומות ולא עוקבים אחר שימוש לצרכי פרסום.</li>
+      </ul>
+
+      <h2>4. שמירת מידע</h2>
+      <p>כל המידע שנאסף על-ידי האפליקציה עצמה נשמר מקומית על המכשיר בלבד. ניתן למחוק את כל המידע על-ידי מחיקת האפליקציה מהמכשיר.</p>
+
+      <h2>5. שיתוף מידע עם צדדים שלישיים</h2>
+      <p>אנחנו לא מוכרים, לא מסחרים ולא מעבירים מידע אישי לצדדים שלישיים למטרות שיווקיות.</p>
+      <p>השירותים של צד שלישי שאנחנו משתמשים בהם:</p>
+      <ul>
+        <li><strong>RevenueCat:</strong> לניהול מנויים ורכישות בלבד.</li>
+        <li><strong>Apple App Store / Google Play:</strong> לעיבוד תשלומים ולסטטיסטיקות שימוש בסיסיות.</li>
+      </ul>
+
+      <h2>6. פרטיות ילדים</h2>
+      <p>האפליקציה מיועדת לילדים בגילאי 4–8 ועומדת בדרישות <strong>COPPA</strong> (חוק הגנת פרטיות ילדים מקוונת בארה"ב) ובתקנות הגנת הפרטיות האירופאיות (GDPR) בהקשר ילדים.</p>
+      <p>אנחנו לא אוספים בכוונה מידע מזהה מילדים מתחת לגיל 13. ההורה אחראי על הגדרת האפליקציה ועל השימוש בה.</p>
+
+      <h2>7. אבטחת מידע</h2>
+      <p>אנחנו נוקטים אמצעים סבירים להגנה על המידע המוגבל שנאסף. עם זאת, שום שיטת העברת מידע באינטרנט אינה בטוחה ב-100%, ואיננו יכולים להבטיח אבטחה מוחלטת.</p>
+
+      <h2>8. שינויים במדיניות</h2>
+      <p>אנחנו עשויים לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו בדף זה עם עדכון התאריך בראש העמוד. המשך השימוש באפליקציה לאחר עדכון מהווה הסכמה למדיניות המעודכנת.</p>
+
+      <h2>9. זכויות המשתמש</h2>
+      <p>בהתאם לחוקי הגנת הפרטיות החלים, יש לכם זכות לבקש:</p>
+      <ul>
+        <li>מידע על הנתונים שנאספו עליכם.</li>
+        <li>מחיקת כל הנתונים שנאספו (למחיקת נתוני שימוש – פשוט מחקו את האפליקציה; לבקשות הנוגעות לנתוני RevenueCat – <a href="mailto:support@angli-li.com">צרו קשר</a>).</li>
+      </ul>
+
+      <h2>10. יצירת קשר</h2>
+      <p>לכל שאלה או בקשה בנושא פרטיות, אנחנו כאן:</p>
+      <p>📧 <a href="mailto:support@angli-li.com">support@angli-li.com</a></p>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="images/app_icon.png" alt="אנגלי-לי" />
+        <span>אנגלי-לי</span>
+      </a>
+      <nav class="footer-links">
+        <a href="index.html">דף הבית</a>
+        <a href="privacy.html">מדיניות פרטיות</a>
+        <a href="terms.html">תקנון ותנאי שימוש</a>
+      </nav>
+      <p class="footer-copy">© 2026 אנגלי-לי · כל הזכויות שמורות</p>
+    </div>
+  </footer>
+
+  <script>
+    const sl = document.getElementById('starsLayer');
+    for (let i = 0; i < 80; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const sz = Math.random() * 2 + 0.5;
+      s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:-${Math.random()*5}s;`;
+      sl.appendChild(s);
+    }
+  </script>
+</body>
+</html>
